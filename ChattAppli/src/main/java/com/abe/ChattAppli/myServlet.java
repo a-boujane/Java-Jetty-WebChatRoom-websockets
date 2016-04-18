@@ -11,7 +11,7 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
  */
 public class myServlet {
 	public static void main(String[] args) throws Exception {
-		Server server = new Server(8088);
+		Server server = new Server(8082);
 		WebSocketHandler ws = new WebSocketHandler() {
 
 			@Override

@@ -1,5 +1,6 @@
 package com.abe.ChattAppli;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.jetty.websocket.api.Session;
@@ -36,6 +37,14 @@ public class Sessions {
 
 	public static void addSessionAndUsername(Session session) {
 		addSessionAndUsername(session, "default");
+	}
+
+	static void sendToAllSessions(String message) throws IOException {
+		for(SessionAndUsername sau: sessions){
+			sau.getSession().getRemote().sendString(message);
+		}
+		// TODO Auto-generated method stub
+		
 	}
 
 }
