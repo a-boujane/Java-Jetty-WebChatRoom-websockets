@@ -9,14 +9,14 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
  *
  * 
  */
-public class myServlet {
+public class MyServlet {
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(8082);
 		WebSocketHandler ws = new WebSocketHandler() {
 
 			@Override
 			public void configure(WebSocketServletFactory factory) {
-				factory.register(mySocket.class);
+				factory.register(MySocket.class);
 			}
 
 		};

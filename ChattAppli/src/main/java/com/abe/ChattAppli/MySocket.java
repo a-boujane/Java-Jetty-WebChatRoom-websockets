@@ -11,7 +11,7 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.json.JSONArray;
 
 @WebSocket
-public class mySocket {
+public class MySocket {
 	SessionAndUsername sau;
 
 	@OnWebSocketConnect
