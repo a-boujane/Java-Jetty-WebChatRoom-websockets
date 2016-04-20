@@ -85,6 +85,7 @@ public class MySocket {
 				System.out.println("Message Sent to "+session);
 			} catch (WebSocketException e) {
 				System.out.println(session.getRemoteAddress() + e.getMessage());
+				sessions.remove(session);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
