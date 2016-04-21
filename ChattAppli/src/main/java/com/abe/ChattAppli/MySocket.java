@@ -42,7 +42,20 @@ public class MySocket {
 
 	@OnWebSocketMessage
 	public void onMessage(Session session, String message) {
+		if (MySocket.isItKeepAlive(message)){
+			try {
+				this.session.getRemote().sendString(message);
+				System.out.println("Got a keepAlive from "+session.getRemoteAddress());
+			} catch (WebSocketException e) {
+				// TODO Auto-generated catch block
+				System.out.println(session.getRemoteAddress()+e.getMessage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println(session.getRemoteAddress()+e.getMessage());
 
+			}
+			}
+		else{
 		try {
 			if (first) {
 				map.replace(session.getRemoteAddress(), message);
@@ -60,7 +73,7 @@ public class MySocket {
 			} 
 		} catch (WebSocketException e) {
 			System.out.println( e.getMessage());
-		}
+		}}
 
 	}
 
@@ -69,7 +82,7 @@ public class MySocket {
 		try {
 			System.out.println("Error from :" + MySocket.getUsernameByRemoteAddress(session.getRemoteAddress()));
 			System.out.println(error.getMessage());
-			//		this.onClose(0, "an Error Occured - Internal Close");
+			//		this.onClose(0, "an Error Occurred - Internal Close");
 		} catch (ConcurrentModificationException e) {
 			System.out.println("Error!! ++++" +e.getMessage());
 		}
@@ -78,7 +91,7 @@ public class MySocket {
 
 	@OnWebSocketClose
 	public void onClose(int statusCode, String reason) {
-		System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
+		System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason+session.getRemoteAddress());
 		try {
 			map.remove(session.getRemoteAddress());
 
@@ -104,6 +117,10 @@ public class MySocket {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private static boolean isItKeepAlive(String g){
+		return g.equals("***KeepAlive***");
 	}
 
 	private static String getUsernameByRemoteAddress(InetSocketAddress adr) {

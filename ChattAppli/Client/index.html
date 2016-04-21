@@ -21,15 +21,23 @@
 				// alert("Opened!");
 				var person = prompt("Please enter your name");
 				ws.send(person);
+				setInterval(function() {
+					ws.send("***KeepAlive***");
+				}, 60000);
 			};
 
 			ws.onmessage = function(evt) {
-				$("ol").append("<li>" + evt.data + "</li>");
+				if (evt.data !== "***KeepAlive***") {
+					$("ol").append("<li>" + evt.data + "</li>");
+				}
 			};
 
 			function sendMessage() {
-				ws.send(document.getElementById("message").value);
-			}
+				var msg=document.getElementById("message").value;
+				if(msg!==""){
+				ws.send(msg);
+				document.getElementById("message").value = "";
+			}}
 
 			function closeConnection() {
 				ws.onclose = function() {
@@ -38,13 +46,18 @@
 				};
 			}
 
+			function onKeyDown(event) {
+				if (event.keyCode == 13)
+					sendMessage();
+			}
+
 		</script>
 	</head>
 	<body>
 		<h1>WebSocket test</h1>
 
 		Message:
-		<input type="text" id="message" >
+		<input type="text" onkeydown="onKeyDown(event)" id="message" >
 
 		<button id="send" onclick="sendMessage()">
 			Send
