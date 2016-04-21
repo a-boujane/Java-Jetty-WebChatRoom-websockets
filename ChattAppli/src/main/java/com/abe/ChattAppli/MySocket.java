@@ -2,8 +2,9 @@ package com.abe.ChattAppli;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketException;
@@ -16,8 +17,8 @@ import org.json.JSONArray;
 
 @WebSocket
 public class MySocket {
-	static ArrayList<Session> sessions = new ArrayList<Session>();
-	String dit = "dit -->";
+	static CopyOnWriteArrayList<Session> sessions = new CopyOnWriteArrayList<Session>();
+	String dit = " >>>>> ";
 	boolean first = true;
 	Session session;
 
@@ -25,11 +26,14 @@ public class MySocket {
 
 	@OnWebSocketConnect
 	public void onConnect(Session session) {
-		first = true;
-		System.out.println("Entered OnConnect" + session.getRemoteAddress());
-		this.session = session;
-		sessions.add(session);
-		initialize(session);
+		try {
+			first = true;
+			System.out.println("Entered OnConnect" + session.getRemoteAddress());
+			this.session = session;
+			sessions.add(session);
+			initialize(session);
+		} catch (ConcurrentModificationException e) {
+			System.out.println("Error OnCOnnect!!! ++++" +e.getMessage());		}
 	}
 
 	private void initialize(Session session) {
@@ -43,6 +47,7 @@ public class MySocket {
 			if (first) {
 				map.replace(session.getRemoteAddress(), message);
 				first = false;
+				System.out.println("About to send this to all: "+ message + " is now online");
 				MySocket.sendToAll(message + " is now online");
 			}
 
@@ -60,10 +65,14 @@ public class MySocket {
 	}
 
 	@OnWebSocketError
-	public void onError(Session session, Throwable error) throws Exception {
-		System.out.println("Error from :" + MySocket.getUsernameByRemoteAddress(session.getRemoteAddress()));
-		System.out.println(error.getMessage());
-//		this.onClose(0, "an Error Occured - Internal Close");
+	public void onError(Session session, Throwable error) {
+		try {
+			System.out.println("Error from :" + MySocket.getUsernameByRemoteAddress(session.getRemoteAddress()));
+			System.out.println(error.getMessage());
+			//		this.onClose(0, "an Error Occured - Internal Close");
+		} catch (ConcurrentModificationException e) {
+			System.out.println("Error!! ++++" +e.getMessage());
+		}
 
 	}
 
@@ -73,7 +82,7 @@ public class MySocket {
 		try {
 			map.remove(session.getRemoteAddress());
 
-		} catch (Exception e) {
+		} catch (ConcurrentModificationException e) {
 			System.out.println("Debug the CLose Bruh!");
 		}
 	}
@@ -82,11 +91,15 @@ public class MySocket {
 		for (Session session : sessions) {
 			try {
 				session.getRemote().sendString(message);
-				System.out.println("Message Sent to "+session);
-			} catch (WebSocketException e) {
+				System.out.println("Message Sent to "+MySocket.getUsernameByRemoteAddress(session.getRemoteAddress()));
+			}  catch (ConcurrentModificationException e) {
+				System.out.println("COncurrentExceptionCaught " + session.getRemoteAddress() + e.getMessage());
+				sessions.remove(session);}
+			catch (WebSocketException e) {
 				System.out.println(session.getRemoteAddress() + e.getMessage());
 				sessions.remove(session);
-			} catch (IOException e) {
+			}
+			 catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
