@@ -13,7 +13,6 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import org.json.JSONArray;
 
 @WebSocket
 public class MySocket {
@@ -127,8 +126,8 @@ public class MySocket {
 		return map.get(adr) + "@" + adr;
 	}
 
-	public JSONArray getUsers() {
-		return (new JSONArray(Sessions.getUsernames()));
-	}
+//	public JSONArray getUsers() {
+//		return (new JSONArray(Sessions.getUsernames()));
+//	}
 
 }
