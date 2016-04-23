@@ -17,9 +17,7 @@ public class MyServlet {
 
 			@Override
 			public void configure(WebSocketServletFactory factory) {
-				System.out.println("Right before theMySocket.class");
 				factory.register(MySocket.class);
-				System.out.println("Right after theMySocket.class");
 			}
 
 		};
