@@ -9,11 +9,11 @@
 			// });
 			// });
 
-			$("#message").keyup(function(event) {
-				if (event.keyCode == 13) {
-					$("#send").click();
-				}
-			});
+			// $("#message").keyup(function(event) {
+				// if (event.keyCode == 13) {
+					// $("#send").click();
+				// }
+			// });
 
 			var ws = new WebSocket("ws://10.0.0.17:8020/");
 
@@ -23,7 +23,7 @@
 				ws.send(person);
 				setInterval(function() {
 					ws.send("***KeepAlive***");
-				}, 60000);
+				}, 20000);
 			};
 
 			ws.onmessage = function(evt) {

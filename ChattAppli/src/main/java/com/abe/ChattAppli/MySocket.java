@@ -32,7 +32,7 @@ public class MySocket {
 			sessions.add(session);
 			initialize(session);
 		} catch (ConcurrentModificationException e) {
-			System.out.println("Error OnCOnnect!!! ++++" +e.getMessage());		}
+			System.out.println("Error OnConnect!!! ++++" +e.getMessage());		}
 	}
 
 	private void initialize(Session session) {
