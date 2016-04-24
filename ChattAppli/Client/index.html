@@ -12,31 +12,79 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-size: 14pt;
+				background: url(bgd.jpg) no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			}
+			h1 {
+				text-align: center;
+				color: white;
+			}
+			label {
+				color: white;
+			}
+			.well{
+				background-color: rgba(245, 245, 245, 0.15);
+			}
+
+		</style>
 	</head>
 	<body>
+		<div class="container" >
 
-		<div class="container">
-			<div class="page-header">
-				<div class="jumbotron">
-					<h1>Free light IM Web App</h1>
+			<!-- Here goes the Jumbotron -->
+			<div class="container">
+				<div class="page-header">
+					<div class="jumbotron" style="background-color: rgba(245, 245, 245, 0.15);" >
+						<h1 style="color: white;">Free IM Web App</h1>
+					</div>
 				</div>
+
 			</div>
 
+			<!-- Here goes the Panel for the conversation -->
+
+			<div class="well" >
+
+				<div class="panel panel-default" style="background: rgba(245, 245, 245, 0.15);">
+					<div class="panel-body" style="max-height: 5;overflow-y: scroll;">
+						<ul></ul>
+					</div>
+
+				</div>
+
+				<div style="padding: 3%">
+					<label for="focusedInput">Message: </label>
+
+					<!-- here goes the grid -->
+					<div class="row">
+
+						<div class="input-group">
+							<div class="col-sm-10">
+								<textarea class="form-control" id="message" type="text" onkeydown="onKeyDown(event)"  ></textarea>
+							</div>
+
+							<div class="col-sm-2">
+								<div class="input-group-btn">
+									<!-- Buttons -->
+									<button id="send" onclick="sendMessage()" type="button" class="btn btn-primary btn-block" >
+										Send
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Here ends the Grid -->
+				</div>
+			</div>
 		</div>
-
-		<section style="padding: 3%">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<ul></ul>
-				</div>
-
-			</div>
-			<label for="focusedInput">Message: </label>
-			<input class="form-control" id="message" type="text" onkeydown="onKeyDown(event)">
-			</div>
-			<button id="send" onclick="sendMessage()" type="button" class="btn btn-primary">
-				Send
-			</button>
-		</section>
 	</body>
 </html>
