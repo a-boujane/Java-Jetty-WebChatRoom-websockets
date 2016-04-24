@@ -11,7 +11,7 @@ ws.onopen = function() {
 
 ws.onmessage = function(evt) {
 	if (evt.data !== "***KeepAlive***") {
-		$("ol").append("<li>" + evt.data + "</li>");
+		$("ul").append("<li>" + evt.data + "</li>");
 	}
 };
 
