@@ -1,0 +1,78 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14pt;
+	background: url(bgd.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	margin: 0;
+	height: 100%;
+}
+
+html {
+	margin: 0;
+	height: 100%;
+}
+
+h1 {
+	text-align: center;
+	color: white;
+}
+
+label {
+	color: black;
+}
+
+.well {
+	background-color: rgba(5, 5, 5, 0.5);
+}
+
+.blurr {
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+}
+
+.panel-body {
+	height: calc(100% - 50px); /* Or whatever */
+	margin: auto; /* Magic! */
+}
+
+#rcorners {
+	border-radius: 25px;
+	border: 2px solid;
+	padding: 9px;
+	width: 65%;
+	height: auto;
+	margin: 6px;
+	word-wrap: break-word;
+	background: linear-gradient(to bottom right, #dbdbdb, #939393);
+}
+
+#rcorners {
+	border-radius: 25px;
+	border: 2px solid;
+	padding: 9px;
+	width: 65%;
+	height: auto;
+	margin: 6px;
+	word-wrap: break-word;
+	background: linear-gradient(to bottom right, #dbdbdb, #939393);
+}
+
+ul {
+	list-style-type: none;
+}
+
+.panel-body {
+	height: 200px;
+}
+
+@media screen and (min-height: 700px) {
+	.panel-body {
+		height: 390px;
+	}
+}

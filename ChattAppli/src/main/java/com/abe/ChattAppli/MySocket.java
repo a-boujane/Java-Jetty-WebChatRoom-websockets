@@ -64,7 +64,7 @@ public class MySocket {
 			}
 
 			else {
-				System.out.println("Received Message: '" + message + "' from :"
+				System.out.println("Received Message: " + message + " from :"
 						+ MySocket.getUsernameByRemoteAddress(session.getRemoteAddress()));
 
 				message = map.get(session.getRemoteAddress()) + dit + message;
