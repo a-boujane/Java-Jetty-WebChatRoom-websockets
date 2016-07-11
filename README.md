@@ -1,6 +1,6 @@
 # Web Chat Room
 
-## visit http://www.chat-app.tk for a simple demo 
+## visit http://www.salsaeternity.com/ for a simple demo 
 ###(Preferrably on Google Chrome)
 
 This is a simple web chatroom that sits on a Java based server. 
